@@ -105,6 +105,17 @@ public class BitbucketEventTest {
         assertEquals(action, bitbucketEvent.getAction());
     }
 
+    @Test
+    public void testPullRequestEventFulfilledAction() {
+        String event = "pullrequest";
+        String action = "fulfilled";
+
+        BitbucketEvent bitbucketEvent = createEvent(event, action);
+
+        assertEquals(event, bitbucketEvent.getName());
+        assertEquals(action, bitbucketEvent.getAction());
+    }
+
     @Test(expected = UnsupportedOperationException.class)
     public void testUnknownEvent() {
         String event = "fake";

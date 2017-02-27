@@ -45,6 +45,9 @@ public class PullRequestTriggerMatcher implements BitbucketEventTriggerMatcher {
         } else if (BitbucketEvent.PULL_REQUEST_ACTIONS.UPDATED.equals(bitbucketEvent.getAction()) &&
                 triggerFilter.getActionFilter() instanceof  PullRequestUpdatedActionFilter) {
             return true;
+        } else if (BitbucketEvent.PULL_REQUEST_ACTIONS.FULFILLED.equals(bitbucketEvent.getAction()) &&
+                triggerFilter.getActionFilter() instanceof  PullRequestFulfilledActionFilter) {
+            return true;
         }
         return false;
     }

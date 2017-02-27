@@ -43,6 +43,7 @@ public class BitbucketEvent {
         String CREATED = "created";
         String APPROVED = "approved";
         String UPDATED = "updated";
+        String FULFILLED = "fulfilled";
     }
 
     private String name;
@@ -82,6 +83,8 @@ public class BitbucketEvent {
             } else if(PULL_REQUEST_ACTIONS.CREATED.equals(action)) {
                 return true;
             } else if(PULL_REQUEST_ACTIONS.UPDATED.equals(action)) {
+                return true;
+            } else if(PULL_REQUEST_ACTIONS.FULFILLED.equals(action)) {
                 return true;
             }
         }

@@ -29,10 +29,7 @@ import java.util.List;
 
 import com.cloudbees.jenkins.plugins.BitBucketTrigger;
 import com.cloudbees.jenkins.plugins.filter.BitbucketTriggerFilter;
-import com.cloudbees.jenkins.plugins.filter.pullrequest.PullRequestApprovedActionFilter;
-import com.cloudbees.jenkins.plugins.filter.pullrequest.PullRequestCreatedActionFilter;
-import com.cloudbees.jenkins.plugins.filter.pullrequest.PullRequestTriggerFilter;
-import com.cloudbees.jenkins.plugins.filter.pullrequest.PullRequestUpdatedActionFilter;
+import com.cloudbees.jenkins.plugins.filter.pullrequest.*;
 import com.cloudbees.jenkins.plugins.filter.repository.RepositoryPushActionFilter;
 import com.cloudbees.jenkins.plugins.filter.repository.RepositoryTriggerFilter;
 
@@ -90,6 +87,16 @@ public class BitbucketHookJobDslExtension extends ContextExtensionPoint {
         List<BitbucketTriggerFilter> triggers;
         PullRequestUpdatedActionFilter pullRequestUpdatedActionFilter = new PullRequestUpdatedActionFilter();
         PullRequestTriggerFilter pullRequestTriggerFilter = new PullRequestTriggerFilter(pullRequestUpdatedActionFilter);
+        triggers = new ArrayList<BitbucketTriggerFilter>();
+        triggers.add(pullRequestTriggerFilter);
+        return new BitBucketTrigger(triggers);
+    }
+
+    @DslExtensionMethod(context = TriggerContext.class)
+    public Object bitbucketFulfillRequestUpdatedAction() {
+        List<BitbucketTriggerFilter> triggers;
+        PullRequestFulfilledActionFilter pullRequestFulfilledActionFilter = new PullRequestFulfilledActionFilter();
+        PullRequestTriggerFilter pullRequestTriggerFilter = new PullRequestTriggerFilter(pullRequestFulfilledActionFilter);
         triggers = new ArrayList<BitbucketTriggerFilter>();
         triggers.add(pullRequestTriggerFilter);
         return new BitBucketTrigger(triggers);
